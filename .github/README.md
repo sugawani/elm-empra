@@ -16,6 +16,12 @@ yarn dev
 yarn build
 ```
 
+## ビルド for Github Pages
+```
+yarn build-github-pages
+```
+
+
 ## テスト
 ```
 yarn test
