@@ -4,8 +4,14 @@ import Browser
 import Html exposing (Html, div, text)
 
 
+main : Program () Model Msg
 main =
-    Browser.sandbox { init = init, update = update, view = view }
+    Browser.element
+        { init = init
+        , view = view
+        , update = update
+        , subscriptions = subscriptions
+        }
 
 
 
@@ -13,12 +19,12 @@ main =
 
 
 type alias Model =
-    String
+    { item : String }
 
 
-init : Model
-init =
-    "てんぷら🍤"
+init : () -> ( Model, Cmd Msg )
+init _ =
+    ( { item = "てんぷら🍤" }, Cmd.none )
 
 
 
@@ -29,11 +35,11 @@ type Msg
     = None
 
 
-update : Msg -> Model -> Model
+update : Msg -> Model -> ( Model, Cmd msg )
 update msg model =
     case msg of
         None ->
-            model
+            ( model, Cmd.none )
 
 
 
@@ -43,4 +49,13 @@ update msg model =
 view : Model -> Html Msg
 view model =
     div []
-        [ text model ]
+        [ text model.item ]
+
+
+
+-- SUBSCRIPTIONS
+
+
+subscriptions : Model -> Sub Msg
+subscriptions model =
+    Sub.none
